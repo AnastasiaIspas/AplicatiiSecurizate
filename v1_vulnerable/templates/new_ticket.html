@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Ticket nou{% endblock %}
+
+{% block content %}
+<h1>Ticket nou</h1>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="title">Titlu</label>
+        <input type="text" id="title" name="title" placeholder="Ex: Server down" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Descriere</label>
+        <textarea id="description" name="description" placeholder="Descrie problema..."></textarea>
+    </div>
+    <div class="form-group">
+        <label for="severity">Severitate</label>
+        <select id="severity" name="severity">
+            <option value="LOW">LOW</option>
+            <option value="MED">MED</option>
+            <option value="HIGH">HIGH</option>
+        </select>
+    </div>
+    <button type="submit" class="btn">Creeaza ticket</button>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary" style="margin-left:10px;">Inapoi</a>
+</form>
+{% endblock %}

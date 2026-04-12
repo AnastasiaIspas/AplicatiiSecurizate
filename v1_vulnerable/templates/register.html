@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h1>Creeaza cont</h1>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="utilizator@exemplu.com" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Parola</label>
+        <!-- VULNERABIL 4.1: nicio cerinta minima de parola -->
+        <input type="password" id="password" name="password" placeholder="Orice parola (chiar si '1')" required>
+    </div>
+    <button type="submit" class="btn">Creeaza cont</button>
+</form>
+
+<p style="margin-top:20px;">
+    Ai deja cont? <a href="{{ url_for('login') }}" class="link">Autentifica-te</a>
+</p>
+{% endblock %}

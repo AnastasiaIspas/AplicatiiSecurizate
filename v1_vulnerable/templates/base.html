@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuthX – {% block title %}{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+        }
+
+        nav {
+            background: #b71c1c;
+            color: white;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .brand { font-size: 1.3rem; font-weight: bold; letter-spacing: 1px; }
+        nav .badge {
+            background: #ff5252;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        nav a { color: white; text-decoration: none; margin-left: 16px; font-size: 0.95rem; }
+        nav a:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 480px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .container-wide {
+            max-width: 860px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 { font-size: 1.6rem; margin-bottom: 24px; color: #b71c1c; }
+        h2 { font-size: 1.2rem; margin-bottom: 16px; color: #555; }
+
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 600; color: #555; }
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #b71c1c;
+        }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 24px;
+            background: #b71c1c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #7f0000; }
+        .btn-secondary {
+            background: #666;
+        }
+        .btn-secondary:hover { background: #444; }
+        .btn-small {
+            padding: 6px 14px;
+            font-size: 0.82rem;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+        .alert-error   { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
+        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2e7d32; }
+        .alert-warning { background: #fff8e1; color: #f57f17; border-left: 4px solid #f57f17; font-family: monospace; }
+        .alert-info    { background: #e3f2fd; color: #1565c0; border-left: 4px solid #1565c0; }
+
+        .vuln-banner {
+            background: #b71c1c;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+        }
+
+        .link { color: #b71c1c; text-decoration: none; font-size: 0.9rem; }
+        .link:hover { text-decoration: underline; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        th { background: #fafafa; font-weight: 600; color: #555; }
+
+        .badge-severity {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .LOW    { background: #e8f5e9; color: #2e7d32; }
+        .MED    { background: #fff8e1; color: #f57f17; }
+        .HIGH   { background: #ffebee; color: #c62828; }
+        .OPEN        { background: #e3f2fd; color: #1565c0; }
+        .IN_PROGRESS { background: #fff8e1; color: #f57f17; }
+        .RESOLVED    { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</head>
+<body>
+
+<div class="vuln-banner">
+    ⚠ VERSIUNEA VULNERABILA (v1) – doar pentru testare in mediu controlat ⚠
+</div>
+
+<nav>
+    <div>
+        <span class="brand">AuthX</span>
+        <span class="badge">VULNERABLE</span>
+    </div>
+    <div>
+        {% if session.get('user_id') %}
+            <span>{{ session.get('email') }}</span>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="{% block container_class %}container{% endblock %}">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
