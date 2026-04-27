@@ -17,7 +17,7 @@ import requests
 import time
 
 BASE_URL = "http://127.0.0.1:5000"
-TARGET_EMAIL = "test@test.com"
+TARGET_EMAIL = "victim@authx.com"
 PAROLA_NOUA = "hacked123"
 
 print("=" * 60)
