@@ -16,13 +16,13 @@ import time
 BASE_URL = "http://127.0.0.1:5000"
 
 # Tinta: un cont existent (creat in atacul 4.1)
-TARGET_EMAIL = "test@test.com"
+TARGET_EMAIL = "admin@authx.com"
 
 # Lista de parole de incercat (dictionar simplu)
 WORDLIST = [
     "wrongpass", "notright", "badpassword",
     "abc123", "letmein", "admin", "qwerty",
-    "1",  # <-- parola corecta (setata in atacul 4.1)
+    "1",
     "password", "12345",
 ]
 
