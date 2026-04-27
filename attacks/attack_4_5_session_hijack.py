@@ -27,7 +27,7 @@ print("\n[1] Login ca utilizator legitim...")
 sesiune_victima = requests.Session()
 response = sesiune_victima.post(
     f"{BASE_URL}/login",
-    data={"email": "test@test.com", "password": "1"},
+    data={"email": "admin@authx.com", "password": "admin"},
     allow_redirects=True
 )
 
@@ -48,7 +48,7 @@ print("\n[2] Analiza flagurilor de securitate ale cookie-ului...")
 # Refacem login cu allow_redirects=False ca sa vedem Set-Cookie raw
 r = requests.post(
     f"{BASE_URL}/login",
-    data={"email": "test@test.com", "password": "1"},
+    data={"email": "admin@authx.com", "password": "admin"},
     allow_redirects=False
 )
 
