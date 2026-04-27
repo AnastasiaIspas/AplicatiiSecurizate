@@ -16,12 +16,12 @@ PAROLA_FALSA = "parola_falsa_intentionat_123"
 
 # Emailuri de testat — unele exista, altele nu
 EMAILURI = [
-    "test@test.com",           # EXISTA (creat in atacul 4.1)
-    "victim_1@test.com",       # EXISTA (creat in atacul 4.1)
+    "alice@authx.com",         # EXISTA
+    "bob@authx.com",           # EXISTA
+    "admin@authx.com",         # EXISTA
+    "victim@authx.com",        # EXISTA
     "inexistent@test.com",     # NU exista
     "hacker@fake.com",         # NU exista
-    "victim_password@test.com", # EXISTA (creat in atacul 4.1)
-    "admin@authx.com",         # NU exista
 ]
 
 print("=" * 60)
